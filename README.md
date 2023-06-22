@@ -1,34 +1,9 @@
-# frontend-template
+#前端模板
 
-## Project setup
 ```
+cp .env.example .env
 npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
-```
-
-### Compiles and minifies for production
-```
 npm run build
+帳號 : admin@gmail.com
+密碼 : 123qweasd
 ```
-
-### Run your unit tests
-```
-npm run test:unit
-```
-
-### Run your end-to-end tests
-```
-npm run test:e2e
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
