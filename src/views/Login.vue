@@ -104,6 +104,9 @@
 <script>
 import { ref } from "vue";
 import axios from "axios";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+
 const apiUrl = "auth/login";
 export default {
   setup() {
@@ -112,12 +115,22 @@ export default {
       password: "",
     });
 
+    const store = useStore();
+    const router = useRouter();
+
     const api = () => {
-      axios
-        .post(process.env.VUE_APP_API_URL + apiUrl, data.value)
-        .then((res) => {
-          console.log(res.data);
-        });
+      axios.post(apiUrl, data.value).then((response) => {
+        let token = response.data.access_token;
+        if (token) {
+          // Toast.success('登入成功');
+          localStorage.setItem("token", token);
+          store.dispatch("auth/saveToken", token);
+          return router.push({ name: "dashboard" });
+        } else {
+          console.log(response);
+          // Toast.fail("賬戶密碼錯誤");
+        }
+      });
     };
 
     return {

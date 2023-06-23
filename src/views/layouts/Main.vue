@@ -32,14 +32,14 @@
               <a
                 v-for="item in navigation"
                 :key="item.name"
-                :href="item.href"
+                :href="item.path"
                 :class="[
-                  item.current
+                  item.path == route.path
                     ? 'bg-gray-900 text-white'
                     : 'text-gray-300 hover:bg-gray-700 hover:text-white',
                   'rounded-md px-3 py-2 text-sm font-medium',
                 ]"
-                :aria-current="item.current ? 'page' : undefined"
+                :aria-current="item.path == route.path ? 'page' : undefined"
                 >{{ item.name }}</a
               >
             </div>
@@ -124,14 +124,14 @@
           v-for="item in navigation"
           :key="item.name"
           as="a"
-          :href="item.href"
+          :href="item.path"
           :class="[
-            item.current
+            item.path == route.path
               ? 'bg-gray-900 text-white'
               : 'text-gray-300 hover:bg-gray-700 hover:text-white',
             'block rounded-md px-3 py-2 text-base font-medium',
           ]"
-          :aria-current="item.current ? 'page' : undefined"
+          :aria-current="item.path == route.path ? 'page' : undefined"
           >{{ item.name }}</DisclosureButton
         >
       </div>
@@ -150,11 +150,10 @@ import {
   MenuItems,
 } from "@headlessui/vue";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/vue/24/outline";
-
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
+import { useRoute } from "vue-router";
+import router from "@/router";
+const route = useRoute();
+const navigation = router.options.routes.filter(function (item, index, array) {
+  return item.meta.requiresAuth == true;
+});
 </script>
