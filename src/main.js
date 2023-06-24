@@ -5,6 +5,9 @@ import axios from 'axios';
 import { createStore } from 'vuex';
 import auth from './store/auth';
 import './assets/tailwind.css';
+import { createI18n } from 'vue-i18n';
+import en from './locales/en.js';
+import zh from './locales/zh.js';
 
 // 設定預設的基本 URL
 axios.defaults.baseURL = process.env.VUE_APP_API_URL;
@@ -44,4 +47,12 @@ const store = createStore({
   },
 });
 
-createApp(App).use(store).use(router).mount('#app');
+const i18n = createI18n({
+  locale: 'zh', // 默認語言
+  messages: {
+    zh,
+    en,
+  },
+});
+
+createApp(App).use(store).use(router).use(i18n).mount('#app');

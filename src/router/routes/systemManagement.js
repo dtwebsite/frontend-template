@@ -10,8 +10,9 @@ export default [
     // {
     //     path: '/SystemManagement/ManagerCreate',
     //     name: 'SystemManagement-ManagerCreate',
-    //     component: () => import('@/views/system-management/ManagerCrud.vue'),
+    //     component: () => import('@/views/system-management/ManagerForm.vue'),
     //     meta: {
+    //         menuCategory: 'SystemManagement',
     //         requiresAuth: true,
     //     },
     // },
